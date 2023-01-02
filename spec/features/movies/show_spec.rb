@@ -42,9 +42,8 @@ RSpec.describe "The Movie show page" do
 
     visit "/movies/#{hmc.id}"
 
-    expect(page).to have_content('Add Actor')
-    expect(find('form')).to have_content('Actor id')
-    fill_in 'Actor id', with: "#{c_bale.id}"
+    expect(find('form')).to have_content('Actor')
+    fill_in 'Actor', with: "#{c_bale.id}"
     click_button 'Submit'
 
     expect(current_path).to eq("/movies/#{hmc.id}")

@@ -5,5 +5,12 @@
 <% @actors.each do |actor| %>
   <h4><%= actor.name %>, <%= actor.age %></h4>
 <% end %>
-
+<% if @actors.count > 0 %>
 <h4>Average Actor Age: <%= @movie.actor_age_avg %></h4>
+<% end %>
+
+<%= form_with url: "/movie_actors?movie_id=#{@movie.id}", method: :post do |f| %>
+  <%= f.label :actor_id %>
+  <%= f.text_field :actor_id %>
+  <%= f.submit "Submit" %>
+<% end %>
