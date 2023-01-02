@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Movie do
+RSpec.describe Actor do
   describe 'relationships' do
-    it {should belong_to :studio}
     it {should have_many :movie_actors}
-    it {should have_many :actors}
+    it {should have_many :movies}
   end
 end
