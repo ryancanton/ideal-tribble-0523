@@ -18,11 +18,11 @@ RSpec.describe "The Movie show page" do
 
     visit "/movies/#{hmc.id}"
 
-    expect(page).to have_content(hmc.name)
+    expect(page).to have_content(hmc.title)
     expect(page).to have_content(hmc.creation_year)
     expect(page).to have_content(hmc.genre)
 
-    expect(page).to have_content("plinplon")
+    expect(page).to have_content("Actors:\nJosh Hutcherson, 26\nChristian Bale, 47\nBilly Crystal, 52")
 
     expect(page).to have_content("Average Actor Age: #{hmc.actor_age_avg}")
   end
