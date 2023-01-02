@@ -26,4 +26,28 @@ RSpec.describe "The Movie show page" do
 
     expect(page).to have_content("Average Actor Age: #{hmc.actor_age_avg}")
   end
+
+#   As a user,
+# When I visit a movie show page,
+# I do not see any actors listed that are not part of the movie
+# And I see a form to add an actor to this movie
+# When I fill in the form with the ID of an actor that exists in the database
+# And I click submit
+# Then I am redirected back to that movie's show page
+# And I see the actor's name is now listed
+  it 'contains a from to add an existing actor to a movie' do
+    ghibli = Studio.create!(name: "Studio Ghibli", location: "Japan")
+    hmc = ghibli.movies.create!(title: "Howl's Moving Castle", creation_year: "2004", genre: "Adventure")
+    c_bale = Actor.create!(name: "Christian Bale", age: 47)
+
+    visit "/movies/#{hmc.id}"
+
+    expect(page).to have_content('Add Actor')
+    expect(find('form')).to have_content('Actor id')
+    fill_in 'Actor id', with: "#{c_bale.id}"
+    click_button 'Submit'
+
+    expect(current_path).to eq("/movies/#{hmc.id}")
+    expect(page).to have_content("Christian Bale, 47")
+  end
 end
